@@ -64,6 +64,7 @@ function gotMessage(message, sender, sendResponse) {
 			div1.style.display = "none";
 			div2 = createPlayer2Template();
 			body[0].appendChild(div2);
+						
 		}
 		Player1Control();
 	}
