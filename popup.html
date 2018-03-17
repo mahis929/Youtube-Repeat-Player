@@ -6,7 +6,23 @@
 	</title>
 </head>
 <body>
-    <h1>Smart Pause</h1>
+    <h1>Youtube repeat Player</h1>
+    <form>
+	    <div>
+	        <label for="starting-point">Starting Point</label>
+	        <input type="time" id="starting-point" name = "starting-point" step="2" value="00:00:00">
+	    </div>
+	    <div>
+	        <label for="stopping-point">Stopping Point</label>
+	        <input type="time" id="stopping-point" name="stopping-point" step="2" value="00:00:00">
+	    </div>
+	    <div class="button">
+		    <button type="submit">Play(Repeat)</button>
+		</div>
+	</form>
+	<div id="history">
+		<p>Contains all the recently played videos</p>
+	</div>
 	<script type="text/javascript" src="popup.js"></script>
 </body>
 </html>
