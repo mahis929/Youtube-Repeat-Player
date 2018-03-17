@@ -7,14 +7,6 @@ chrome.runtime.onMessage.addListener(gotMessage);
 
 function gotMessage(message, sender, sendResponse) {
 	console.log("BrowserAction clicked, Music player loaded!!");
-	var body = document.getElementsByTagName('body');
-	var div = document.createElement('div');
-	div.setAttribute("id", "yrp-player");
-	div.style.zIndex = "99999";
-	div.style.position = "relative";
-	div.style.float = "right";
-	div.innerHTML = '<div class="sidebar" style="right: -300px;width:200px;height:100vh;background:#262626;transition:0.5s;padding:20px;box-sizing:border-box;"> <div style="font-size:20px;text-align:center;"> <label for="strt-point">Starting point</label><br> <input type="number" name="strt-point" id="strt-point" value="0"><br><br> <label for="end-point">Ending point</label><br> <input type="number" name="end-point" id="end-point" value="0"> <br><br> <button id="goyrp">Submit</button> </div> <div id="recents" style="background:#0E0B70; height:200px; margin:10px -10px 0px -10px;"><h3 style="text-align:center">Recently Played</h3></div> </div>';
-	body[0].appendChild(div);
 
 	if(message.value) {
 		console.log("BrowserAction clicked, Music player loaded!!");
@@ -65,6 +57,19 @@ function gotMessage(message, sender, sendResponse) {
 				hist.push(song);
 			}
 			console.log(song); //for debug prints out the updated song
+			/*
+			Update local storage with new song
+			*/
+			console.log(hist);
+			var new_data = {"yrp": {
+				"history": hist,
+				"playlists": playlists,
+				"starred": starred
+			}};
+			chrome.storage.local.set(new_data, function() {
+				console.log("New data saved!");
+			});
+
 
 			//check in small intervals the current time of the video and repeat
 			interval_id = setInterval(function() { repeater(start, stop); }, 300);
@@ -92,9 +97,11 @@ function repeater(start, stop) {
 
 function createPlayer1Template() {
 	let div = document.createElement('DIV');
-	div.setAttribute("id", "yrp-player1");
-	div.style.zIndex = "1000";
-	div.innerHTML = "<h1 style = 'color:red;'>HJADJHASGDJ</h1>";
+	div.setAttribute("id", "yrp-player");
+	div.style.zIndex = "99999";
+	div.style.position = "relative";
+	div.style.float = "right";
+	div.innerHTML = '<div class="sidebar" style="right: -300px;width:200px;height:100vh;background:#262626;transition:0.5s;padding:20px;box-sizing:border-box;"> <div style="font-size:20px;text-align:center;"> <label for="strt-point">Starting point</label><br> <input type="number" name="strt-point" id="strt-point" value="0"><br><br> <label for="end-point">Ending point</label><br> <input type="number" name="end-point" id="end-point" value="0"> <br><br> <button id="goyrp">Submit</button> </div> <div id="recents" style="background:#0E0B70; height:200px; margin:10px -10px 0px -10px;"><h3 style="text-align:center">Recently Played</h3></div> </div>';
 	return div;
 }
 
