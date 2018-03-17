@@ -6,7 +6,6 @@ var hist, playlists, starred;
 chrome.runtime.onMessage.addListener(gotMessage);
 
 function gotMessage(message, sender, sendResponse) {
-<<<<<<< HEAD
 	console.log("BrowserAction clicked, Music player loaded!!");
 	var body = document.getElementsByTagName('body');
 	var div = document.createElement('div');
@@ -43,7 +42,6 @@ function gotMessage(message, sender, sendResponse) {
 	/*body[0].appendChild(script1);
 	body[0].appendChild(script);*/
 }
-=======
 	
 	if(message.value) {
 		console.log("BrowserAction clicked, Music player loaded!!");
@@ -144,4 +142,4 @@ function listTitles(hist) {
 	}
 	return titles;
 }
->>>>>>> a4938882d3a0bc2149235e3f51e7eda7416f6b87
+
